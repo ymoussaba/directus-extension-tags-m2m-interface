@@ -279,15 +279,15 @@ async function refreshSuggestions(keyword: string) {
 				_nin: currentIds.join(','),
 			},
 		},
-		{
-			_or: fromSeparatedTag(keyword).map((value) => {
-				return {
-					[props.referencingField]: {
-						_contains: value,
-					},
-				};
-			}),
-		},
+		// {
+		// 	_or: fromSeparatedTag(keyword).map((value) => {
+		// 		return {
+		// 			[props.referencingField]: {
+		// 				_contains: value,
+		// 			},
+		// 		};
+		// 	}),
+		// },
 	].filter(Boolean);
 
 	const query = {
@@ -297,6 +297,7 @@ async function refreshSuggestions(keyword: string) {
 			filter: {
 				_and: filters,
 			},
+			search: keyword,
 			...getSortingQuery(),
 		},
 	};
